@@ -1,0 +1,89 @@
+# ==================================================================================================
+# Spring Settings
+# ==================================================================================================/
+# local
+server:
+  port: 8080
+
+spring:
+  application:
+    name: lib-api
+  config:
+    activate:
+      on-profile: local
+  h2:
+    console:
+      enabled: true  # H2 웹 콘솔을 사용하겠다는 의미
+      path: /lib  # 콘솔의 경로
+  datasource:
+    driver-class-name : org.h2.Driver
+    url : jdbc:h2:tcp://localhost/~/lib
+    username : dev_lib
+    password : lib
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      use-new-id-generator-mappings: false
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+  freemarker:
+    cache: false
+  devtools:
+    livereload:
+      enabled: false
+    restart:
+      enabled: false
+logging.level:
+  org.hibernate.SQL: debug
+
+
+---
+# prod
+server:
+  port: 8443
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+    password : 5678
+
+spring:
+  application:
+    name: lib-api
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url : ENC(kE+o4BIPv5eXEMGAb7kuvcfsjL5xNsysaeYgdPej9Fx7T1zA142e6jCXsrTv80lLSNyTuyFr8q9xbpNys7ZYJ1Yj1oZ274HUkhELdEI5NQIK5wJYMzpwtxLWsp3ux/uRlCCesiFB8S+ZKVKxpDuoWa7j5kxFkz9cI5cowY96uX8KjqQOcZn0yAls5W2fHuI0sLYRKAexE0jUcO0mSwiEupu8i+6kPjVsPCvKVAqi0dW91XDhUYsTfzHWU4ZQJVZe5AwbqsfOgmA=)
+    driver-class-name : com.mysql.cj.jdbc.Driver
+    username : ENC(GMOvKQlR+JR6fL/bCq2qpS87chC4mCUj)
+    password : ENC(T18LmEH2RhJ5+UQJYZM2rvL2bpJLy4T4)
+  jpa:
+    hibernate:
+      ddl-auto: create
+      use-new-id-generator-mappings: false
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+  freemarker:
+    cache: false
+  devtools:
+    livereload:
+      enabled: false
+    restart:
+      enabled: false
+logging.level:
+  org.hibernate.SQL: debug
+
+
+---
+
