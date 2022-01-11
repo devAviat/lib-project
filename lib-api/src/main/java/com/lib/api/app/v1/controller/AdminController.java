@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author MG.KIM
+ * @version v1
+ * @createDate 2021-01-11
+ */
+
 @Slf4j
 @RequestMapping("/v1")
 @Api(tags = {"관리자 관리"})

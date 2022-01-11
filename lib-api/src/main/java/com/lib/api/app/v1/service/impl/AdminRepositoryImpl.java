@@ -24,9 +24,13 @@ public class AdminRepositoryImpl implements AdminRepositoryCustom {
 
     @Override
     public Admin findByIdx(Long adminIdx) {
-        Admin admin = queryFactory.selectFrom(QAdmin.admin)
-                .where(QAdmin.admin.idx.eq(adminIdx)).fetchOne();
+        Admin admin = queryFactory
+                .selectFrom(QAdmin.admin)
+                .where(QAdmin.admin.idx.eq(adminIdx))
+                .fetchOne();
+
         log.info("end :: {}", admin);
+
         return admin;
     }
 }

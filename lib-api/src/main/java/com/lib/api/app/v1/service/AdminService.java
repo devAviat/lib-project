@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author MG.KIM
  * @version v1
  * @createDate 2022-01-05
- * @updateDate
  * @description
  * 관리자 등록, 수정, 삭제 서비스
  */
@@ -26,18 +25,20 @@ public class AdminService {
 
     /**
      * 광리자 정보 등록.
-     * @param param
-     * @return
+     * @CreateAdminDTO param
+     * @return Admin
      */
     @Transactional
     public Admin createAdmin(CreateAdminDTO param) {
-        return adminRepository.save(Admin.builder().param(param).build());
+        Admin build = Admin.builder().param(param).build();
+        log.info("build :: {}", build);
+        return adminRepository.save(build);
     }
 
     /**
      * 광리자 정보 상세.
      * @param adminIdx
-     * @return
+     * @return Admin
      */
     public Admin readOneAdmin(Long adminIdx) {
         return adminRepository.findByIdx(adminIdx);
@@ -46,8 +47,8 @@ public class AdminService {
 
     /**
      * 관리자 정보 수정.
-     * @param param
-     * @return
+     * @ModifyAdminDTO  param
+     * @return Admin
      */
     @Transactional
     public Admin modifyAdmin(ModifyAdminDTO param) {
