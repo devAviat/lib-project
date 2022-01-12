@@ -12,6 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.UUID;
+
+import static com.lib.api.app.config.JPAConfig.createId;
 
 @Entity(name = "USER")
 @NoArgsConstructor
@@ -23,6 +26,9 @@ public class User {
 
     @NotNull
     private String user_id;
+
+    @NotNull
+    private String user_uuid;
 
     @NotNull
     private String user_name;
@@ -47,7 +53,11 @@ public class User {
         this.user_barcode = param.getBarcode();
         this.user_phone_number = param.getNumber();
         this.user_state = param.getState();
-        //this.create_date = LocalDateTime.now();
+        this.user_uuid = createId();
+        this.create_date = LocalDateTime.now();
         //this.modify_date = LocalDateTime.now();
     }
+
+
+
 }
