@@ -47,7 +47,7 @@ public class Swagger {
         return new ApiInfoBuilder()
                 .title("API")
                 .description("lib-api")
-                .contact(new Contact("Library Manage System API", "https://www.busitdol.space", "dev.aviat@gmail.com"))
+                .contact(new Contact("Library Manage System API", "http://none.space", "dev.aviat@gmail.com"))
                 .version("1.0")
                 .build();
     }
