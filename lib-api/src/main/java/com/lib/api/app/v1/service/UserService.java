@@ -45,34 +45,14 @@ public class UserService {
         User saveUserEntity = userRepository
                 .save(build);
 
+        String userBarcodeInfo = makeBarcodeText("U", saveUserEntity.getUser_uuid(), saveUserEntity.getCreate_date(), saveUserEntity.getIdx());
+
         // USER barcodeText 주입.
-        saveUserEntity.setUser_barcode(makeBarcodeText("U", saveUserEntity.getUser_uuid(), saveUserEntity.getCreate_date(), saveUserEntity.getIdx()));
-        createBarcodeImage(saveUserEntity);
+        saveUserEntity.setUser_barcode(userBarcodeInfo);
+        createBarcodeImage(userBarcodeInfo);
 
         return userRepository
                 .save(build);
-    }
-
-    private void createBarcodeImage(User save) throws Exception {
-        //바코드 이미지 생성.
-        BufferedImage barcodeBufferedImage = generateCode128BarcodeImage(makeBarcodeText("U", save.getUser_uuid(), save.getCreate_date(), save.getIdx()));
-
-        //String root = request.getSession().getServletContext().getRealPath("resources"); //현재 서비스가 돌아가고 있는 서블릿 경로의 resources 폴더 찾기
-
-        String savePath = "root" + "\\qrCodes\\"; // 파일 경로
-
-        //파일 이름에 저장한 날짜를 포함해주기 위해 date생성
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String fileName = sdf.format(new Date()) + barcodeBufferedImage.toString();
-
-        //파일 경로, 파일 이름 , 파일 확장자에 맡는
-        // 파일 생성
-        File temp = new File(savePath + fileName + ".png");
-
-        log.info("barcodeBufferedImage :: {}", barcodeBufferedImage);
-
-        // ImageIO를 사용하여 파일쓰기
-        ImageIO.write(barcodeBufferedImage, "png", temp);
     }
 
 

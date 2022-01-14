@@ -16,8 +16,4 @@ public class BarcodeGenerator {
     public static BufferedImage generateCode128BarcodeImage(String barCodeInfo) throws Exception {
         return ZxingGenerator.generateCode128BarcodeImage(barCodeInfo);
     }
-    /**
-     *
-     */
-
 }
