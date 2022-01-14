@@ -54,6 +54,11 @@ public class QnaController {
         return qnaRepository.findAll();
     }
 
+    /**
+     * QNA 수정.
+     * @param modifyQnaDTO
+     * @return
+     */
     @PutMapping("/qna")
     public Qna modify(ModifyQnaDTO modifyQnaDTO) {
         return qnaService.modify(modifyQnaDTO);

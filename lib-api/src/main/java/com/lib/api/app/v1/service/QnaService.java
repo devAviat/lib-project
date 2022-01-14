@@ -17,6 +17,12 @@ public class QnaService {
 
     private final QnaRepository qnaRepository;
 
+    /**
+     * 등록
+     * @param param
+     * @return
+     */
+    @Transactional
     public Qna createQna(CreateQnaDTO param) {
         Qna buildQna = Qna
                 .builder()
@@ -27,12 +33,24 @@ public class QnaService {
 
     }
 
+    /**
+     * 단건 조회.
+     * @param qnaIdx
+     * @return
+     */
     public Qna read(Long qnaIdx) {
         return qnaRepository.findByQnaIdx(qnaIdx);
     }
 
+    /**
+     * 수정
+     * @param param
+     * @return
+     */
+    @Transactional
     public Qna modify(ModifyQnaDTO param) {
         Qna findQna = qnaRepository.findByQnaIdx(param.getQnaIdx());
+
         findQna.setQnaTitle(param.getQnaTitle());
         findQna.setQnaContent(param.getQnaContent());
 
