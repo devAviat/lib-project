@@ -9,6 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.parser.Entity;
+
+import static com.lib.api.app.v1.service.CommonService.*;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -19,27 +23,39 @@ public class BookService {
 
     /**
      * 등록
+     *
      * @param param
      * @return
      */
     @Transactional
     public Book createBook(CreateBookDTO param) {
+
         Book buildBook = Book
                 .builder()
                 .param(param)
                 .build();
-        return bookRepository.save(buildBook);
+
+        Book saveBook = bookRepository.save(buildBook);
+
+        saveBook.setBookBarcode(makeBarcodeText("B", saveBook.getBookId(), saveBook.getCreateDate(), saveBook.getBookIdx()));
+
+        return saveBook;
     }
 
 
+    /**
+     * 수정.
+     * @param param
+     * @return
+     */
     @Transactional
     public Book modifyBook(ModifyBookDTO param) {
-        Book bookEntity = bookRepository.findByBookIdx(param.getBookIdx());
+        Book modifyBook = bookRepository.findByBookIdx(param.getBookIdx());
 
-        bookEntity.setBookAuthor(param.getBookAuthor());
-        bookEntity.setBookName(param.getBookName());
-        bookEntity.setBookPrice(param.getBookPrice());
+        modifyBook.setBookAuthor(param.getBookAuthor());
+        modifyBook.setBookName(param.getBookName());
+        modifyBook.setBookPrice(param.getBookPrice());
 
-        return bookEntity;
+        return modifyBook;
     }
 }

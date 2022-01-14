@@ -1,12 +1,5 @@
 package com.lib.api.app.v1.service;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.oned.Code128Writer;
-import com.lib.api.app.config.BarcodeGenerator;
-import com.lib.api.app.config.JPAConfig;
-import com.lib.api.app.config.ZxingGenerator;
 import com.lib.api.app.v1.dto.CreateUserDTO;
 import com.lib.api.app.v1.dto.ModifyUserDTO;
 import com.lib.api.app.v1.entity.User;
@@ -17,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -27,6 +18,7 @@ import java.util.List;
 
 import static com.lib.api.app.config.BarcodeGenerator.*;
 import static com.lib.api.app.config.JPAConfig.*;
+import static com.lib.api.app.v1.service.CommonService.*;
 
 @Service
 @Slf4j
@@ -55,7 +47,7 @@ public class UserService {
                 .save(build);
 
         // USER barcodeText 주입.
-        saveUserEntity.setUser_barcode(getMakeBarcodeText(saveUserEntity));
+        saveUserEntity.setUser_barcode(makeBarcodeText("U", saveUserEntity.getUser_uuid(), saveUserEntity.getCreate_date(), saveUserEntity.getIdx()));
         createBarcodeImage(saveUserEntity);
 
         return userRepository
@@ -64,7 +56,7 @@ public class UserService {
 
     private void createBarcodeImage(User save) throws Exception {
         //바코드 이미지 생성.
-        BufferedImage barcodeBufferedImage = generateCode128BarcodeImage(getMakeBarcodeText(save));
+        BufferedImage barcodeBufferedImage = generateCode128BarcodeImage(makeBarcodeText("U", save.getUser_uuid(), save.getCreate_date(), save.getIdx()));
 
         //String root = request.getSession().getServletContext().getRealPath("resources"); //현재 서비스가 돌아가고 있는 서블릿 경로의 resources 폴더 찾기
 
@@ -121,15 +113,5 @@ public class UserService {
         return user;
     }
 
-    // 사용자 바코드 정보 취합.
-    private String getMakeBarcodeText(User save) {
 
-        String barCodeInfo = "LIB"
-                + save.getUser_uuid() //uuid
-                + localDateTimeToPlainText(save.getCreate_date())//localDateTime
-                + save.getIdx();//user index
-
-        log.info("barCodeInfo :: {}", barCodeInfo);
-        return barCodeInfo;
-    }
 }

@@ -16,7 +16,7 @@ import static com.lib.api.app.config.ZxingGenerator.*;
 @Controller
 @Slf4j
 @RequestMapping("/v1")
-public class BarcodeController {
+public class TempBarcodeController {
 
     //정상 작동 안함.
     @GetMapping(value = "/barbecue/ean13/{barcode}", produces = MediaType.IMAGE_PNG_VALUE)

@@ -11,6 +11,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import java.time.LocalDateTime;
+
+import static com.lib.api.app.config.JPAConfig.createId;
+
 @Entity(name = "BOOK")
 @Data
 @NoArgsConstructor
@@ -21,26 +25,31 @@ public class Book {
     @Column(name = "book_idx")
     private Long bookIdx;
 
-    @NotNull
-    @Column(name = "book_name")
+    @Column(name = "book_id", unique = true)
+    private String bookId;
+
+    @Column(name = "book_name", nullable = false)
     private String bookName;
 
-    @NotNull
-    @Column(name = "book_author")
+    @Column(name = "book_author", nullable = false)
     private String bookAuthor;
 
-    @NotNull
-    @Column(name = "book_price")
+    @Column(name = "book_price", nullable = false)
     private Long bookPrice;
 
-    @Column(name = "book_barcode")
+    @Column(name = "book_barcode",unique = true)
     private String bookBarcode;
+
+    @Column(name = "create_date", nullable = true)
+    private LocalDateTime createDate;
 
     @Builder
     public Book(CreateBookDTO param) {
+        this.bookId = createId();
         this.bookName = param.getName();
         this.bookAuthor = param.getAuthor();
         this.bookPrice = param.getPrice();
+        this.createDate = LocalDateTime.now();
     }
 
 
