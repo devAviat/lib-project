@@ -22,11 +22,13 @@ public class UserService {
     @Transactional
     public User userCreate(CreateUserDTO param) {
         log.info("param :: {}", param);
+
         User build = User
                 .builder()
                 .param(param)
                 .build();
         log.info("build :: {}", build);
+
         return userRepository
                 .save(build);
     }
