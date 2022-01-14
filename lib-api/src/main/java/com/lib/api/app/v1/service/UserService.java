@@ -4,6 +4,8 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.oned.Code128Writer;
+import com.lib.api.app.config.BarcodeGenerator;
+import com.lib.api.app.config.JPAConfig;
 import com.lib.api.app.config.ZxingGenerator;
 import com.lib.api.app.v1.dto.CreateUserDTO;
 import com.lib.api.app.v1.dto.ModifyUserDTO;
@@ -14,8 +16,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import static com.lib.api.app.config.BarcodeGenerator.*;
+import static com.lib.api.app.config.JPAConfig.*;
 
 @Service
 @Slf4j
@@ -33,45 +44,43 @@ public class UserService {
      * @throws Exception
      */
     @Transactional
-    public User userCreate(CreateUserDTO param) throws Exception {
+    public User userCreate(CreateUserDTO param, HttpServletRequest request, HttpSession session) throws Exception {
         User build = User
                 .builder()
                 .param(param)
                 .build();
 
         // USER Entity 삽입.
-        User save = userRepository
+        User saveUserEntity = userRepository
                 .save(build);
 
-        // 사용자 바코드 정보 취합.
-        /**
-         * String barcode_info = "LIB+UUID+20220112155200+IDX";
-         */
-        String barcode_info = "LIB"
-                + save.getUser_uuid()
-                + save.getCreate_date()
-                + save.getIdx();
-
-        log.info("barcode_info :: {}", barcode_info);
-
-        //바코드 생성
-        //todo -바코드 이미지 저장.
-        BufferedImage qrCode = createBarCode(barcode_info);
+        // USER barcodeText 주입.
+        saveUserEntity.setUser_barcode(getMakeBarcodeText(saveUserEntity));
+        createBarcodeImage(saveUserEntity, request, session);
 
         return userRepository
                 .save(build);
     }
 
-    /**
-     * 바코드 생성.
-     *
-     * @param barcode_info
-     * @return
-     * @throws Exception
-     */
-    private BufferedImage createBarCode(String barcode_info) throws Exception {
-        return ZxingGenerator.generateCode128BarcodeImage(barcode_info);
+    private void createBarcodeImage(User save, HttpServletRequest request, HttpSession session) throws Exception {
+        //바코드 이미지 생성.
+        BufferedImage barcodeBufferedImage = generateCode128BarcodeImage(getMakeBarcodeText(save));
+
+        String root = request.getSession().getServletContext().getRealPath("resources"); //현재 서비스가 돌아가고 있는 서블릿 경로의 resources 폴더 찾기
+
+        String savePath = root + "\\qrCodes\\"; // 파일 경로
+
+        //파일 이름에 저장한 날짜를 포함해주기 위해 date생성
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String fileName = sdf.format(new Date()) + barcodeBufferedImage.toString();
+
+        //파일 경로, 파일 이름 , 파일 확장자에 맡는 파일 생성
+        File temp = new File(savePath + fileName + ".png");
+
+        // ImageIO를 사용하여 파일쓰기
+        ImageIO.write(barcodeBufferedImage, "png", temp);
     }
+
 
     /**
      * 사용자 조회.
@@ -109,4 +118,15 @@ public class UserService {
         return user;
     }
 
+    // 사용자 바코드 정보 취합.
+    private String getMakeBarcodeText(User save) {
+
+        String barCodeInfo = "LIB"
+                + save.getUser_uuid() //uuid
+                + localDateTimeToPlainText(save.getCreate_date())//localDateTime
+                + save.getIdx();//user index
+
+        log.info("barCodeInfo :: {}", barCodeInfo);
+        return barCodeInfo;
+    }
 }

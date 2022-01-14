@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,6 +18,14 @@ public class JPAConfig {
 
     public static String createId() {
         return UUID.randomUUID().toString().replace("-", "");
+    }
+
+    public static String localDateTimeToPlainText(LocalDateTime localDateTime) {
+
+        return localDateTime.toString()
+                .replace("-", "")
+                .replace(":", "")
+                .replace(".", "");
     }
 
 }
