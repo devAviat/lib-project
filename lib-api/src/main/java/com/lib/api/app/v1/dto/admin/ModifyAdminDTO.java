@@ -1,11 +1,10 @@
-package com.lib.api.app.v1.dto;
+package com.lib.api.app.v1.dto.admin;
 
 import lombok.Data;
 
 @Data
-public class CreateAdminDTO {
-
-    private String admin_id;
+public class ModifyAdminDTO {
+    private Long idx;
 
     private String name;
 

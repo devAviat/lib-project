@@ -1,7 +1,7 @@
 package com.lib.api.app.v1.service;
 
-import com.lib.api.app.v1.dto.CreateQnaDTO;
-import com.lib.api.app.v1.dto.ModifyQnaDTO;
+import com.lib.api.app.v1.dto.qna.CreateQnaDTO;
+import com.lib.api.app.v1.dto.qna.ModifyQnaDTO;
 import com.lib.api.app.v1.entity.Qna;
 import com.lib.api.app.v1.repository.QnaRepository;
 import lombok.RequiredArgsConstructor;

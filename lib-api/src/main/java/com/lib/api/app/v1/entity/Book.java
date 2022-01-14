@@ -1,7 +1,6 @@
 package com.lib.api.app.v1.entity;
 
-import com.lib.api.app.v1.dto.CreateBookDTO;
-import com.sun.istack.NotNull;
+import com.lib.api.app.v1.dto.book.CreateBookDTO;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;

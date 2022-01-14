@@ -1,6 +1,6 @@
 package com.lib.api.app.v1.entity;
 
-import com.lib.api.app.v1.dto.CreateUserDTO;
+import com.lib.api.app.v1.dto.user.CreateUserDTO;
 import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
 import lombok.Builder;

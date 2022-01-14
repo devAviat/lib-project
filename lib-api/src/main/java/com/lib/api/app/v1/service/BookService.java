@@ -1,15 +1,13 @@
 package com.lib.api.app.v1.service;
 
-import com.lib.api.app.v1.dto.CreateBookDTO;
-import com.lib.api.app.v1.dto.ModifyBookDTO;
+import com.lib.api.app.v1.dto.book.CreateBookDTO;
+import com.lib.api.app.v1.dto.book.ModifyBookDTO;
 import com.lib.api.app.v1.entity.Book;
 import com.lib.api.app.v1.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.swing.text.html.parser.Entity;
 
 import static com.lib.api.app.v1.service.CommonService.*;
 

@@ -1,7 +1,7 @@
 package com.lib.api.app.v1.service;
 
-import com.lib.api.app.v1.dto.CreateUserDTO;
-import com.lib.api.app.v1.dto.ModifyUserDTO;
+import com.lib.api.app.v1.dto.user.CreateUserDTO;
+import com.lib.api.app.v1.dto.user.ModifyUserDTO;
 import com.lib.api.app.v1.entity.User;
 import com.lib.api.app.v1.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.List;
 
 import static com.lib.api.app.config.BarcodeGenerator.*;
-import static com.lib.api.app.config.JPAConfig.*;
 import static com.lib.api.app.v1.service.CommonService.*;
 
 @Service

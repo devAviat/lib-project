@@ -1,4 +1,4 @@
-package com.lib.api.app.v1.dto;
+package com.lib.api.app.v1.dto.book;
 
 import com.sun.istack.NotNull;
 import lombok.Data;

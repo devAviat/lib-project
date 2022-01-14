@@ -1,7 +1,6 @@
 package com.lib.api.app.v1.controller;
 
-import com.lib.api.app.v1.dto.CreateQnaDTO;
-import com.lib.api.app.v1.dto.ModifyQnaDTO;
+import com.lib.api.app.v1.dto.qna.*;
 import com.lib.api.app.v1.entity.Qna;
 import com.lib.api.app.v1.repository.QnaRepository;
 import com.lib.api.app.v1.service.QnaService;

@@ -1,7 +1,7 @@
 package com.lib.api.app.v1.service;
 
-import com.lib.api.app.v1.dto.CreateAdminDTO;
-import com.lib.api.app.v1.dto.ModifyAdminDTO;
+import com.lib.api.app.v1.dto.admin.CreateAdminDTO;
+import com.lib.api.app.v1.dto.admin.ModifyAdminDTO;
 import com.lib.api.app.v1.entity.Admin;
 import com.lib.api.app.v1.repository.AdminRepository;
 import lombok.RequiredArgsConstructor;

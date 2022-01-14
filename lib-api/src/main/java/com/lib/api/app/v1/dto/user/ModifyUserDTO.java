@@ -1,4 +1,4 @@
-package com.lib.api.app.v1.dto;
+package com.lib.api.app.v1.dto.user;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package com.lib.api.app.v1.entity;
 
-import com.lib.api.app.v1.dto.CreateAdminDTO;
+import com.lib.api.app.v1.dto.admin.CreateAdminDTO;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;

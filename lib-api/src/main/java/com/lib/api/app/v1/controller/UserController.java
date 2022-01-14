@@ -1,7 +1,7 @@
 package com.lib.api.app.v1.controller;
 
-import com.lib.api.app.v1.dto.CreateUserDTO;
-import com.lib.api.app.v1.dto.ModifyUserDTO;
+import com.lib.api.app.v1.dto.user.CreateUserDTO;
+import com.lib.api.app.v1.dto.user.ModifyUserDTO;
 import com.lib.api.app.v1.entity.User;
 import com.lib.api.app.v1.service.UserService;
 import io.swagger.annotations.Api;

@@ -1,7 +1,7 @@
 package com.lib.api.app.v1.controller;
 
-import com.lib.api.app.v1.dto.CreateBookDTO;
-import com.lib.api.app.v1.dto.ModifyBookDTO;
+import com.lib.api.app.v1.dto.book.CreateBookDTO;
+import com.lib.api.app.v1.dto.book.ModifyBookDTO;
 import com.lib.api.app.v1.entity.Book;
 import com.lib.api.app.v1.repository.BookRepository;
 import com.lib.api.app.v1.service.BookService;
