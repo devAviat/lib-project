@@ -45,10 +45,10 @@ public class UserService {
         User saveUserEntity = userRepository
                 .save(build);
 
-        String userBarcodeInfo = makeBarcodeText("U", saveUserEntity.getUser_uuid(), saveUserEntity.getCreate_date(), saveUserEntity.getIdx());
+        String userBarcodeInfo = makeBarcodeText("U", saveUserEntity.getUserUuid(), saveUserEntity.getCreateDate(), saveUserEntity.getIdx());
 
         // USER barcodeText 주입.
-        saveUserEntity.setUser_barcode(userBarcodeInfo);
+        saveUserEntity.setUserBarcode(userBarcodeInfo);
         createBarcodeImage(userBarcodeInfo);
 
         return userRepository
@@ -84,10 +84,10 @@ public class UserService {
     @Transactional
     public User modify(ModifyUserDTO param) {
         User user = userRepository.findByIdx(param.getIdx());
-        user.setUser_name(param.getName());
-        user.setUser_barcode(param.getBarcode());
-        user.setUser_phone_number(param.getNumber());
-        user.setUser_state(param.getState());
+        user.setUserName(param.getName());
+        user.setUserBarcode(param.getBarcode());
+        user.setUserPhoneNumber(param.getNumber());
+        user.setUserState(param.getState());
 
         return user;
     }

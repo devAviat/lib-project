@@ -32,14 +32,13 @@ public class BookController {
     @ApiOperation(value = "도서 단건 조회.")
     @GetMapping(value = "/book/{bookIdx}")
     public Book read(@PathVariable Long bookIdx) {
-        return bookRepository.findByBookIdx(bookIdx);
+        return bookService.readBook(bookIdx);
     }
 
     @ApiOperation(value = "도서 목록.")
     @GetMapping(value = "/book/list")
     public List<Book> list() {
-        return bookRepository.findAll();
-
+        return bookService.readBookList();
     }
 
     @ApiOperation(value = "관리자 수정.")

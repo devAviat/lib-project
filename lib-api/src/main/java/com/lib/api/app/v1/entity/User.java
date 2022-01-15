@@ -1,62 +1,63 @@
 package com.lib.api.app.v1.entity;
 
 import com.lib.api.app.v1.dto.user.CreateUserDTO;
-import com.sun.istack.NotNull;
-import com.sun.istack.Nullable;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 import static com.lib.api.app.config.JPAConfig.createId;
 
-@Entity(name = "USER")
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
+@Entity(name = "USER")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
-    @NotNull
-    private String user_id;
+    @Column(name = "user_id", unique = true, nullable = false)
+    private String userId;
 
-    @NotNull
-    private String user_uuid;
+    @Column(name = "user_uuid", nullable = false)
+    private String userUuid;
 
-    @NotNull
-    private String user_name;
+    @Column(name = "user_name", nullable = false)
+    private String userName;
 
-    private String user_barcode;
+    @Column(name = "user_barcode", nullable = false)
+    private String userBarcode;
 
-    private String user_state;
+    @Column(name = "user_state", nullable = true)
+    private String userState;
 
-    @NotNull
-    private String user_phone_number;
+    @Column(name = "user_phone_number", nullable = true)
+    private String userPhoneNumber;
 
-    @Nullable
-    private LocalDateTime create_date;
+    @Column(name = "create_date", nullable = true)
+    private LocalDateTime createDate;
 
-    @Nullable
-    private LocalDateTime modify_date;
+    @Column(name = "modify_date", nullable = true)
+    private LocalDateTime modifyDate;
+
+    @ManyToOne
+    @JoinColumn(name = "rend_id")
+    private Rent rent;
 
     @Builder
     public User(CreateUserDTO param) {
-        this.user_id = param.getId();
-        this.user_name = param.getName();
-        this.user_barcode = param.getBarcode();
-        this.user_phone_number = param.getNumber();
-        this.user_state = param.getState();
-        this.user_uuid = createId();
-        this.create_date = LocalDateTime.now();
+        this.userId = param.getId();
+        this.userUuid = createId();
+        this.userName = param.getName();
+        this.userBarcode = param.getBarcode();
+        this.userPhoneNumber = param.getNumber();
+        this.userState = param.getState();
+        this.createDate = LocalDateTime.now();
         //this.modify_date = LocalDateTime.now();
     }
-
 
 
 }

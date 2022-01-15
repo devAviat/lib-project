@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static com.lib.api.app.v1.service.CommonService.*;
 
 @Service
@@ -55,5 +57,13 @@ public class BookService {
         modifyBook.setBookPrice(param.getBookPrice());
 
         return modifyBook;
+    }
+
+    public List<Book> readBookList() {
+        return bookRepository.findAll();
+    }
+
+    public Book readBook(Long bookIdx) {
+        return bookRepository.findByBookIdx(bookIdx);
     }
 }
