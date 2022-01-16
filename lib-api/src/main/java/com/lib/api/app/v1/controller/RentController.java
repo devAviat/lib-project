@@ -26,7 +26,7 @@ public class RentController {
     private final BookService bookService;
 
     @ApiOperation(value = "도서 대여.")
-    @PostMapping("/book")
+    @PostMapping("/rent/book")
     public Rent rentBook(CreateRentDTO createRentDTO) {
         //todo what need to???!
         // first read user information.

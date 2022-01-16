@@ -41,7 +41,13 @@ public class BookController {
         return bookService.readBookList();
     }
 
-    @ApiOperation(value = "관리자 수정.")
+    @ApiOperation(value = "도서 검색 목록.")
+    @GetMapping(value = "/book/list/search")
+    public List<Book> bookListSearch(@RequestParam("searchKeyword") String searchKeyword) {
+        return bookService.bookListSearch(searchKeyword);
+    }
+
+    @ApiOperation(value = "도서 수정.")
     @PutMapping("/book")
     public Book update(ModifyBookDTO param) {
         return bookService.modifyBook(param);
