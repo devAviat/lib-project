@@ -1,5 +1,6 @@
 package com.lib.api.app.v1.entity;
 
+import com.lib.api.app.config.JPAConfig;
 import com.lib.api.app.v1.dto.user.CreateUserDTO;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 import static com.lib.api.app.config.JPAConfig.createId;
+
 
 @Data
 @NoArgsConstructor

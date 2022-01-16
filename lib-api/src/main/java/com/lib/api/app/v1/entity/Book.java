@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 import static com.lib.api.app.config.JPAConfig.createId;
+import static com.lib.api.app.v1.entity.Book.BookStatus.*;
 
 @Entity(name = "BOOK")
 @Data
@@ -36,11 +37,17 @@ public class Book {
     @Column(name = "book_price", nullable = false)
     private Long bookPrice;
 
-    @Column(name = "book_barcode",unique = true)
+    @Column(name = "book_status", nullable = false)
+    private BookStatus bookStatus;
+
+    @Column(name = "book_barcode", unique = true)
     private String bookBarcode;
 
-    @Column(name = "create_date", nullable = true)
+    @Column(name = "create_date", updatable = false)
     private LocalDateTime createDate;
+
+    @Column(name = "create_by", updatable = false)
+    private String createBy;
 
     @Builder
     public Book(CreateBookDTO param) {
@@ -49,7 +56,11 @@ public class Book {
         this.bookAuthor = param.getAuthor();
         this.bookPrice = param.getPrice();
         this.createDate = LocalDateTime.now();
+        this.bookStatus = READY;
     }
 
 
+    public enum BookStatus {
+        READY, RENT,
+    }
 }

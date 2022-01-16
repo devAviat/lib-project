@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity(name = "QNA")
 @Data
@@ -25,6 +26,12 @@ public class Qna {
 
     @Column(name = "qna_content", nullable = false)
     private String qnaContent;
+
+    @Column(name = "create_date", updatable = false)
+    private LocalDateTime createDate;
+
+    @Column(name = "create_by", updatable = false)
+    private String createBy;
 
     @Builder
     public Qna(CreateQnaDTO param) {

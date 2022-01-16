@@ -36,8 +36,6 @@ public class Rent {
     @Column(name = "modify_date", nullable = true)
     private LocalDateTime modifyDate;
 
-    private Book book;
-
     @Builder
     public Rent(CreateRentDTO param) {
         this.createDate = LocalDateTime.now();
