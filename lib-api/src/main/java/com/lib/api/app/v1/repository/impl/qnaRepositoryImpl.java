@@ -1,6 +1,5 @@
-package com.lib.api.app.v1.service.impl;
+package com.lib.api.app.v1.repository.impl;
 
-import com.lib.api.app.v1.entity.QQna;
 import com.lib.api.app.v1.entity.Qna;
 import com.lib.api.app.v1.repository.QnaRepositoryCustom;
 import com.querydsl.core.BooleanBuilder;

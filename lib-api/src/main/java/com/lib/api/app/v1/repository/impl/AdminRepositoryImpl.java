@@ -1,4 +1,4 @@
-package com.lib.api.app.v1.service.impl;
+package com.lib.api.app.v1.repository.impl;
 
 import com.lib.api.app.v1.entity.Admin;
 import com.lib.api.app.v1.entity.QAdmin;
@@ -8,8 +8,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.EntityManager;
-
-import static com.lib.api.app.v1.entity.QAdmin.*;
 
 @Slf4j
 public class AdminRepositoryImpl implements AdminRepositoryCustom {

@@ -1,9 +1,11 @@
 package com.lib.api.app.v1.service;
 
+import com.lib.api.app.v1.dto.common.CommonDTO;
 import com.lib.api.app.v1.dto.book.CreateBookDTO;
 import com.lib.api.app.v1.dto.book.ModifyBookDTO;
 import com.lib.api.app.v1.entity.Book;
 import com.lib.api.app.v1.repository.BookRepository;
+import com.querydsl.core.QueryResults;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,7 @@ public class BookService {
     private final BookRepository bookRepository;
 
     /**
-     * 등록
+     * 도서 등록
      *
      * @param param
      * @return
@@ -44,7 +46,8 @@ public class BookService {
 
 
     /**
-     * 수정.
+     * 도서 수정.
+     *
      * @param param
      * @return
      */
@@ -59,11 +62,35 @@ public class BookService {
         return modifyBook;
     }
 
+    /**
+     * 도서 기본목록.
+     *
+     * @return
+     */
     public List<Book> readBookList() {
         return bookRepository.findAll();
     }
 
+    /**
+     * 도서 단건 조회.
+     *
+     * @param bookIdx
+     * @return
+     */
     public Book readBook(Long bookIdx) {
         return bookRepository.findByBookIdx(bookIdx);
+    }
+
+    /**
+     * 도서 검색 목록.
+     *
+     * @param searchKeyword
+     * @return
+     */
+    public List<Book> bookListSearch(String searchKeyword) {
+        log.info("searchKeyword :: {}", searchKeyword);
+        QueryResults<Book> bySearchBook = bookRepository.getSearchBookList(searchKeyword);
+        log.info("bySearchBook :: {}", bySearchBook);
+        return bySearchBook.getResults();
     }
 }

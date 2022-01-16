@@ -1,6 +1,6 @@
 package com.lib.api.app.v1.service;
 
-import com.lib.api.app.v1.entity.User;
+import com.lib.api.app.config.JPAConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 import static com.lib.api.app.config.BarcodeGenerator.generateCode128BarcodeImage;
-import static com.lib.api.app.config.JPAConfig.localDateTimeToPlainText;
 
 @Service
 @Slf4j
@@ -28,7 +27,7 @@ public class CommonService {
         String barCodeInfo =
                 type
                         .concat(uuid)
-                        .concat(localDateTimeToPlainText(createDate))
+                        .concat(JPAConfig.localDateTimeToPlainText(createDate))
                         .concat(String.valueOf(entityIdx));
 
         log.info("barCodeInfo :: {}", barCodeInfo);

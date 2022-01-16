@@ -1,4 +1,4 @@
-package com.lib.api.app.v1.service.impl;
+package com.lib.api.app.v1.repository.impl;
 
 import com.lib.api.app.v1.entity.QUser;
 import com.lib.api.app.v1.entity.User;
