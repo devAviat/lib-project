@@ -30,7 +30,7 @@ public class User {
     @Column(name = "user_name", nullable = false)
     private String userName;
 
-    @Column(name = "user_barcode", nullable = false)
+    @Column(name = "user_barcode", nullable = true)
     private String userBarcode;
 
     @Column(name = "user_state", nullable = true)
@@ -54,11 +54,9 @@ public class User {
         this.userId = param.getId();
         this.userUuid = createId();
         this.userName = param.getName();
-        this.userBarcode = param.getBarcode();
         this.userPhoneNumber = param.getNumber();
         this.userState = param.getState();
         this.createDate = LocalDateTime.now();
-        //this.modify_date = LocalDateTime.now();
     }
 
 

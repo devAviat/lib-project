@@ -35,7 +35,7 @@ public class UserService {
      * @throws Exception
      */
     @Transactional
-    public User userCreate(CreateUserDTO param) throws Exception {
+    public User setCreateUser(CreateUserDTO param) throws Exception {
         User build = User
                 .builder()
                 .param(param)
@@ -49,7 +49,7 @@ public class UserService {
 
         // USER barcodeText 주입.
         saveUserEntity.setUserBarcode(userBarcodeInfo);
-        createBarcodeImage(userBarcodeInfo);
+        //createBarcodeImage(userBarcodeInfo);
 
         return userRepository
                 .save(build);

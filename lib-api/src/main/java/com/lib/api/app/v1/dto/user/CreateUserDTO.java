@@ -6,7 +6,6 @@ import lombok.Data;
 public class CreateUserDTO {
     private String id;
     private String name;
-    private String barcode;
     private String number;
     private String state;
 }
