@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "사용자 목록")
-    @GetMapping(value = "/userList")
+    @GetMapping(value = "/user/list")
     public List<User> list(){
         return userService.userList();
     }

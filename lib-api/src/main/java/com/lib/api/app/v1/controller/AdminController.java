@@ -47,7 +47,7 @@ public class AdminController {
     }
 
     @ApiOperation(value = "관리자 목록")
-    @GetMapping(value = "/admin/adminList", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/admin/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> list() {
         List<Admin> all = adminRepository.findAll();
         log.info("admin List :: {}", all);
