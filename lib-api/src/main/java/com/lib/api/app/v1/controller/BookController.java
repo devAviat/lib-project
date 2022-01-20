@@ -26,26 +26,26 @@ public class BookController {
     @ApiOperation(value = "도서 생성.")
     @PostMapping("/book")
     public Book create(CreateBookDTO createBookDTO) {
-        return bookService.createBook(createBookDTO);
+        return bookService.setCreateBook(createBookDTO);
 
     }
 
     @ApiOperation(value = "도서 단건 조회.")
     @GetMapping(value = "/book/{bookIdx}")
     public Book read(@PathVariable Long bookIdx) {
-        return bookService.readBook(bookIdx);
+        return bookService.getBookOne(bookIdx);
     }
 
     @ApiOperation(value = "도서 목록.")
     @GetMapping(value = "/book/list")
     public List<Book> list() {
-        return bookService.readBookList();
+        return bookService.getBookList();
     }
 
     @ApiOperation(value = "도서 검색 목록.")
     @GetMapping(value = "/book/list/search")
-    public List<Book> bookListSearch(Search search) {
-        return bookService.bookListSearch(search);
+    public List<Book> searchBookList(Search search) {
+        return bookService.getSearchBookList(search);
     }
 
     @ApiOperation(value = "도서 수정.")

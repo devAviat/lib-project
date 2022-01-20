@@ -12,5 +12,5 @@ public class CreateRentDTO {
     private User user;
     private List<Book> bookList;
     private String rentTitle;
-    private String rentCount;
+    private int rentCount;
 }
