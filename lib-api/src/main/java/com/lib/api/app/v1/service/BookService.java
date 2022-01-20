@@ -3,6 +3,7 @@ package com.lib.api.app.v1.service;
 import com.lib.api.app.v1.dto.common.CommonDTO;
 import com.lib.api.app.v1.dto.book.CreateBookDTO;
 import com.lib.api.app.v1.dto.book.ModifyBookDTO;
+import com.lib.api.app.v1.dto.common.Search;
 import com.lib.api.app.v1.entity.Book;
 import com.lib.api.app.v1.repository.BookRepository;
 import com.querydsl.core.QueryResults;
@@ -87,9 +88,8 @@ public class BookService {
      * @param searchKeyword
      * @return
      */
-    public List<Book> bookListSearch(String searchKeyword) {
-        log.info("searchKeyword :: {}", searchKeyword);
-        QueryResults<Book> bySearchBook = bookRepository.getSearchBookList(searchKeyword);
+    public List<Book> bookListSearch(Search search) {
+        QueryResults<Book> bySearchBook = bookRepository.getSearchBookList(search);
         log.info("bySearchBook :: {}", bySearchBook);
         return bySearchBook.getResults();
     }

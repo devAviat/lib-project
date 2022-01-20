@@ -2,6 +2,7 @@ package com.lib.api.app.v1.controller;
 
 import com.lib.api.app.v1.dto.book.CreateBookDTO;
 import com.lib.api.app.v1.dto.book.ModifyBookDTO;
+import com.lib.api.app.v1.dto.common.Search;
 import com.lib.api.app.v1.entity.Book;
 import com.lib.api.app.v1.repository.BookRepository;
 import com.lib.api.app.v1.service.BookService;
@@ -43,8 +44,8 @@ public class BookController {
 
     @ApiOperation(value = "도서 검색 목록.")
     @GetMapping(value = "/book/list/search")
-    public List<Book> bookListSearch(@RequestParam("searchKeyword") String searchKeyword) {
-        return bookService.bookListSearch(searchKeyword);
+    public List<Book> bookListSearch(Search search) {
+        return bookService.bookListSearch(search);
     }
 
     @ApiOperation(value = "도서 수정.")

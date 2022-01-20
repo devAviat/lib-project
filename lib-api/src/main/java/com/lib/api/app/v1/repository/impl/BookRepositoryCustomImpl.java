@@ -1,5 +1,6 @@
 package com.lib.api.app.v1.repository.impl;
 
+import com.lib.api.app.v1.dto.common.Search;
 import com.lib.api.app.v1.entity.Book;
 import com.lib.api.app.v1.repository.BookRepositoryCustom;
 import com.querydsl.core.BooleanBuilder;
@@ -34,10 +35,10 @@ public class BookRepositoryCustomImpl implements BookRepositoryCustom {
     }
 
     @Override
-    public QueryResults<Book> getSearchBookList(String searchKeyword) {
+    public QueryResults<Book> getSearchBookList(Search search) {
 
-        if (StringUtils.hasText(searchKeyword)) {
-            builder.and(book.bookName.contains(searchKeyword));
+        if (StringUtils.hasText(search.getKeyword())) {
+            builder.and(book.bookName.contains(search.getKeyword()));
         }
 
         return queryFactory
