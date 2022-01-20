@@ -3,11 +3,14 @@ package com.lib.api.app.v1.service;
 import com.lib.api.app.v1.dto.qna.CreateQnaDTO;
 import com.lib.api.app.v1.dto.qna.ModifyQnaDTO;
 import com.lib.api.app.v1.entity.Qna;
+import com.lib.api.app.v1.entity.User;
 import com.lib.api.app.v1.repository.QnaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -23,7 +26,7 @@ public class QnaService {
      * @return
      */
     @Transactional
-    public Qna createQna(CreateQnaDTO param) {
+    public Qna setCreateQna(CreateQnaDTO param) {
         Qna buildQna = Qna
                 .builder()
                 .param(param)
@@ -38,7 +41,7 @@ public class QnaService {
      * @param qnaIdx
      * @return
      */
-    public Qna read(Long qnaIdx) {
+    public Qna getOneQna(Long qnaIdx) {
         return qnaRepository.findByQnaIdx(qnaIdx);
     }
 
@@ -48,12 +51,16 @@ public class QnaService {
      * @return
      */
     @Transactional
-    public Qna modify(ModifyQnaDTO param) {
+    public Qna setModifyQna(ModifyQnaDTO param) {
         Qna findQna = qnaRepository.findByQnaIdx(param.getQnaIdx());
 
         findQna.setQnaTitle(param.getQnaTitle());
         findQna.setQnaContent(param.getQnaContent());
 
         return findQna;
+    }
+
+    public List<Qna> getListQna() {
+        return qnaRepository.findAll();
     }
 }

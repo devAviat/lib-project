@@ -13,8 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * @author MG.KIM
  * @version v1
@@ -28,20 +26,19 @@ import java.util.List;
 @RestController
 public class AdminController {
 
-    private final AdminRepository adminRepository;
     private final AdminService adminService;
 
     @ApiOperation(value = "관리자 생성")
     @PostMapping(value = "/admin")
     public Admin create(CreateAdminDTO domain) {
         log.info("test:{}", domain);
-        return adminService.createAdmin(domain);
+        return adminService.setCreateAdmin(domain);
     }
 
     @ApiOperation(value = "관리자 상세내역")
     @GetMapping(value = "/admin/{adminIdx}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> detailOne(@PathVariable Long adminIdx) {
-        Admin admin = adminService.readOneAdmin(adminIdx);
+        Admin admin = adminService.getOneAdmin(adminIdx);
         log.info("test :: {}", admin);
         return ResponseEntity.ok(admin);
     }
@@ -49,15 +46,13 @@ public class AdminController {
     @ApiOperation(value = "관리자 목록")
     @GetMapping(value = "/admin/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> list() {
-        List<Admin> all = adminRepository.findAll();
-        log.info("admin List :: {}", all);
-        return ResponseEntity.ok(all);
+        return ResponseEntity.ok(adminService.getListAdmin());
     }
 
     @ApiOperation(value = "관리자 수정")
     @PutMapping(value = "/admin", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> list(ModifyAdminDTO param) {
-        Admin admin = adminService.modifyAdmin(param);
+        Admin admin = adminService.setModifyAdmin(param);
         return ResponseEntity.ok().body(admin);
     }
 

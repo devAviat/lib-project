@@ -29,7 +29,7 @@ public class QnaController {
      */
     @PostMapping(value = "/qna")
     public Qna create(CreateQnaDTO param) {
-        return qnaService.createQna(param);
+        return qnaService.setCreateQna(param);
     }
 
     /**
@@ -40,7 +40,7 @@ public class QnaController {
      */
     @GetMapping(value = "/qna/{qnaIdx}")
     public Qna read(@PathVariable Long qnaIdx) {
-        return qnaService.read(qnaIdx);
+        return qnaService.getOneQna(qnaIdx);
     }
 
     /**
@@ -50,7 +50,7 @@ public class QnaController {
      */
     @GetMapping(value = "/qna/list")
     public List<Qna> list() {
-        return qnaRepository.findAll();
+        return qnaService.getListQna();
     }
 
     /**
@@ -60,7 +60,7 @@ public class QnaController {
      */
     @PutMapping("/qna")
     public Qna modify(ModifyQnaDTO modifyQnaDTO) {
-        return qnaService.modify(modifyQnaDTO);
+        return qnaService.setModifyQna(modifyQnaDTO);
     }
 
 }

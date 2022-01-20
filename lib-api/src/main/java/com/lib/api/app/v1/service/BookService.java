@@ -31,7 +31,7 @@ public class BookService {
      * @return
      */
     @Transactional
-    public Book createBook(CreateBookDTO param) {
+    public Book setCreateBook(CreateBookDTO param) {
 
         Book buildBook = Book
                 .builder()
@@ -68,7 +68,7 @@ public class BookService {
      *
      * @return
      */
-    public List<Book> readBookList() {
+    public List<Book> getBookList() {
         return bookRepository.findAll();
     }
 
@@ -78,7 +78,7 @@ public class BookService {
      * @param bookIdx
      * @return
      */
-    public Book readBook(Long bookIdx) {
+    public Book getBookOne(Long bookIdx) {
         return bookRepository.findByBookIdx(bookIdx);
     }
 
@@ -88,7 +88,7 @@ public class BookService {
      * @param searchKeyword
      * @return
      */
-    public List<Book> bookListSearch(Search search) {
+    public List<Book> getSearchBookList(Search search) {
         QueryResults<Book> bySearchBook = bookRepository.getSearchBookList(search);
         log.info("bySearchBook :: {}", bySearchBook);
         return bySearchBook.getResults();

@@ -1,6 +1,7 @@
 package com.lib.api.app.v1.controller;
 
 import com.lib.api.app.v1.dto.rent.CreateRentDTO;
+import com.lib.api.app.v1.entity.Book;
 import com.lib.api.app.v1.entity.Rent;
 import com.lib.api.app.v1.entity.User;
 import com.lib.api.app.v1.service.BookService;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 @Slf4j
 @RequestMapping("/v1")
-@Api(tags = {"도서 대여"})
+@Api(tags = {"Rent book"})
 @RequiredArgsConstructor
 @RestController
 public class RentController {
@@ -25,7 +28,7 @@ public class RentController {
     private final UserService userService;
     private final BookService bookService;
 
-    @ApiOperation(value = "도서 대여.")
+    @ApiOperation(value = "Book rent.")
     @PostMapping("/rent/book")
     public Rent rentBook(CreateRentDTO createRentDTO) {
         //todo what need to???!
@@ -33,8 +36,22 @@ public class RentController {
         // second what is it user selected book?
         // we need to bookIdx list and userIdx
 
-        // User info.
-        User user = userService.userReadOne(createRentDTO.getUser().getIdx());
+        //Who rent user?
+        User user1 = userService.getOneUser(1L);
+
+        //What kind book list.
+        ArrayList<Book> bookList = new ArrayList<>();
+        bookList.add(bookService.getBookOne(1L));
+        bookList.add(bookService.getBookOne(4L));
+
+        createRentDTO.setRentCount(bookList.size());
+        createRentDTO.setRentTitle(bookList.get(0).getBookName() + "외" +bookList.size()+ "권");
+        createRentDTO.setBookList(bookList);
+        createRentDTO.setUser(user1);
+
+        String rentTitle = createRentDTO.getRentTitle();
+
+        User user = userService.getOneUser(createRentDTO.getUser().getIdx());
         return rentService.createRent(createRentDTO);
 
     }

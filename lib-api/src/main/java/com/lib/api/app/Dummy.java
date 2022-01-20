@@ -62,10 +62,10 @@ public class Dummy {
             dto4.setPrice(7000L);
 
 
-            bookService.createBook(dto1);
-            bookService.createBook(dto2);
-            bookService.createBook(dto3);
-            bookService.createBook(dto4);
+            bookService.setCreateBook(dto1);
+            bookService.setCreateBook(dto2);
+            bookService.setCreateBook(dto3);
+            bookService.setCreateBook(dto4);
         }
 
     }

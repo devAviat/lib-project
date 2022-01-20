@@ -37,19 +37,19 @@ public class UserController {
     @ApiOperation(value = "사용자 수정")
     @PutMapping(value = "/user")
     public User modify(ModifyUserDTO param){
-        return userService.modify(param);
+        return userService.setModifyUser(param);
     }
 
     @ApiOperation(value = "사용자 조회")
     @GetMapping(value = "/user/{userIdx}")
     public User read(@PathVariable Long userIdx){
-        return userService.userReadOne(userIdx);
+        return userService.getOneUser(userIdx);
     }
 
     @ApiOperation(value = "사용자 목록")
     @GetMapping(value = "/user/list")
     public List<User> list(){
-        return userService.userList();
+        return userService.getListUser();
     }
 
 }

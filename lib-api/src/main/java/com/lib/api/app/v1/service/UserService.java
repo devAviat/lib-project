@@ -62,7 +62,7 @@ public class UserService {
      * @param userIdx
      * @return
      */
-    public User userReadOne(Long userIdx) {
+    public User getOneUser(Long userIdx) {
         return userRepository.findByIdx(userIdx);
     }
 
@@ -71,7 +71,7 @@ public class UserService {
      *
      * @return
      */
-    public List<User> userList() {
+    public List<User> getListUser() {
         return userRepository.findAll();
     }
 
@@ -82,7 +82,7 @@ public class UserService {
      * @return
      */
     @Transactional
-    public User modify(ModifyUserDTO param) {
+    public User setModifyUser(ModifyUserDTO param) {
         User user = userRepository.findByIdx(param.getIdx());
         user.setUserName(param.getName());
         user.setUserBarcode(param.getBarcode());

@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
 /**
  * @author MG.KIM
  * @version v1
@@ -29,7 +32,7 @@ public class AdminService {
      * @return Admin
      */
     @Transactional
-    public Admin createAdmin(CreateAdminDTO param) {
+    public Admin setCreateAdmin(CreateAdminDTO param) {
         Admin build = Admin.builder().param(param).build();
         log.info("build :: {}", build);
         return adminRepository.save(build);
@@ -40,7 +43,7 @@ public class AdminService {
      * @param adminIdx
      * @return Admin
      */
-    public Admin readOneAdmin(Long adminIdx) {
+    public Admin getOneAdmin(Long adminIdx) {
         return adminRepository.findByIdx(adminIdx);
     }
 
@@ -51,7 +54,7 @@ public class AdminService {
      * @return Admin
      */
     @Transactional
-    public Admin modifyAdmin(ModifyAdminDTO param) {
+    public Admin setModifyAdmin(ModifyAdminDTO param) {
         Admin adminEntity = adminRepository.findByIdx(param.getIdx());
         adminEntity.setGrade(param.getGrade());
         adminEntity.setAuthority(param.getAuthority());
@@ -59,5 +62,10 @@ public class AdminService {
         log.info("관리자 정보 수정. ::{}", adminEntity);
 
         return adminEntity;
+    }
+
+    public List<Admin> getListAdmin() {
+        return adminRepository.findAll();
+
     }
 }
