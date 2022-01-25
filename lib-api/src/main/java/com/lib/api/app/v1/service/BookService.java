@@ -1,6 +1,5 @@
 package com.lib.api.app.v1.service;
 
-import com.lib.api.app.v1.dto.common.CommonDTO;
 import com.lib.api.app.v1.dto.book.CreateBookDTO;
 import com.lib.api.app.v1.dto.book.ModifyBookDTO;
 import com.lib.api.app.v1.dto.common.Search;
@@ -13,8 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-import static com.lib.api.app.v1.service.CommonService.*;
 
 @Service
 @Slf4j

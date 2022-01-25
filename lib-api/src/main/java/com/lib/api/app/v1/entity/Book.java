@@ -14,7 +14,6 @@ import java.util.List;
 import static com.lib.api.app.config.JPAConfig.createId;
 import static com.lib.api.app.v1.entity.Book.BookStatus.*;
 import static javax.persistence.EnumType.*;
-import static javax.persistence.FetchType.LAZY;
 
 @Entity(name = "BOOK")
 @Data
@@ -26,30 +25,33 @@ public class Book {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "book_id", unique = true)
+    @Column(name = "book_id")
     private String bookId;
 
-    @Column(name = "book_name", nullable = false)
+    @Column(name = "book_name")
     private String bookName;
 
-    @Column(name = "book_author", nullable = false)
+    @Column(name = "book_author")
     private String bookAuthor;
 
-    @Column(name = "book_price", nullable = false)
+    @Column(name = "book_price")
     private Long bookPrice;
 
     @Enumerated(STRING)
-    @Column(name = "book_status", nullable = false)
+    @Column(name = "book_status")
     private BookStatus bookStatus;
 
-    @Column(name = "book_barcode", unique = true)
+    @Column(name = "book_barcode")
     private String bookBarcode;
 
-    @Column(name = "create_date", updatable = false)
+    @Column(name = "create_date")
     private LocalDateTime createDate;
 
-    @Column(name = "create_by", updatable = false)
+    @Column(name = "create_by")
     private String createBy;
+
+    @OneToMany(mappedBy = "rentBook",cascade = CascadeType.PERSIST)
+    List<RentDetail> rentDetailList = new ArrayList<>();
 
     @Builder
     public Book(CreateBookDTO param) {

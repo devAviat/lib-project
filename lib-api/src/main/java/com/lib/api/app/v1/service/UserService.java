@@ -9,15 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-
-import static com.lib.api.app.config.BarcodeGenerator.*;
-import static com.lib.api.app.v1.service.CommonService.*;
 
 @Service
 @Slf4j
@@ -52,8 +44,8 @@ public class UserService {
      * @param userIdx
      * @return
      */
-    public User getOneUser(Long userIdx) {
-        return userRepository.findByIdx(userIdx);
+    public User getOneUser(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     /**
@@ -73,7 +65,7 @@ public class UserService {
      */
     @Transactional
     public User setModifyUser(ModifyUserDTO param) {
-        User user = userRepository.findByIdx(param.getIdx());
+        User user = getOneUser(param.getIdx());
         user.setUserName(param.getName());
         user.setUserBarcode(param.getBarcode());
         user.setUserPhoneNumber(param.getNumber());
