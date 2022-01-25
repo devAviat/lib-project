@@ -38,11 +38,11 @@ public class QnaService {
 
     /**
      * 단건 조회.
-     * @param qnaIdx
+     * @param id
      * @return
      */
-    public Qna getOneQna(Long qnaIdx) {
-        return qnaRepository.findByQnaIdx(qnaIdx);
+    public Qna getOneQna(Long id) {
+        return qnaRepository.findById(id).orElse(null);
     }
 
     /**
@@ -52,8 +52,7 @@ public class QnaService {
      */
     @Transactional
     public Qna setModifyQna(ModifyQnaDTO param) {
-        Qna findQna = qnaRepository.findByQnaIdx(param.getQnaIdx());
-
+        Qna findQna = getOneQna(param.getId());
         findQna.setQnaTitle(param.getQnaTitle());
         findQna.setQnaContent(param.getQnaContent());
 

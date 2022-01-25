@@ -38,11 +38,7 @@ public class BookService {
                 .param(param)
                 .build();
 
-        Book saveBook = bookRepository.save(buildBook);
-
-        saveBook.setBookBarcode(makeBarcodeText("B", saveBook.getBookId(), saveBook.getCreateDate(), saveBook.getBookIdx()));
-
-        return saveBook;
+        return bookRepository.save(buildBook);
     }
 
 
@@ -54,7 +50,7 @@ public class BookService {
      */
     @Transactional
     public Book modifyBook(ModifyBookDTO param) {
-        Book modifyBook = bookRepository.findByBookIdx(param.getBookIdx());
+        Book modifyBook = getBookOne(param.getId());
 
         modifyBook.setBookAuthor(param.getBookAuthor());
         modifyBook.setBookName(param.getBookName());
@@ -75,11 +71,11 @@ public class BookService {
     /**
      * 도서 단건 조회.
      *
-     * @param bookIdx
+     * @param id
      * @return
      */
-    public Book getBookOne(Long bookIdx) {
-        return bookRepository.findByBookIdx(bookIdx);
+    public Book getBookOne(Long id) {
+        return bookRepository.findById(id).orElse(null);
     }
 
     /**

@@ -13,8 +13,8 @@ import static javax.persistence.FetchType.LAZY;
 public class RentInfo {
     @Id
     @GeneratedValue
-    @Column(name = "rent_info_idx")
-    private Long rentInfoIdx;
+    @Column(name = "id")
+    private Long id;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "rentInfo")

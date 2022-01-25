@@ -29,7 +29,7 @@ public class BookRepositoryCustomImpl implements BookRepositoryCustom {
     public Book findByBookIdx(Long bookIdx) {
         return queryFactory
                 .selectFrom(book)
-                .where(book.bookIdx.eq(bookIdx))
+                .where(book.id.eq(bookIdx))
                 .fetchOne();
 
     }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author MG.KIM
@@ -40,11 +41,11 @@ public class AdminService {
 
     /**
      * 광리자 정보 상세.
-     * @param adminIdx
+     * @param id
      * @return Admin
      */
-    public Admin getOneAdmin(Long adminIdx) {
-        return adminRepository.findByIdx(adminIdx);
+    public Admin getOneAdmin(Long id) {
+        return adminRepository.findById(id).orElse(null);
     }
 
 
@@ -55,17 +56,16 @@ public class AdminService {
      */
     @Transactional
     public Admin setModifyAdmin(ModifyAdminDTO param) {
-        Admin adminEntity = adminRepository.findByIdx(param.getIdx());
-        adminEntity.setGrade(param.getGrade());
-        adminEntity.setAuthority(param.getAuthority());
-        adminEntity.setName(param.getName());
-        log.info("관리자 정보 수정. ::{}", adminEntity);
+        Admin oneAdmin = getOneAdmin(param.getId());
+        oneAdmin.setGrade(param.getGrade());
+        oneAdmin.setAuthority(param.getAuthority());
+        oneAdmin.setName(param.getName());
+        log.info("관리자 정보 수정. ::{}", oneAdmin);
 
-        return adminEntity;
+        return oneAdmin;
     }
 
     public List<Admin> getListAdmin() {
         return adminRepository.findAll();
-
     }
 }

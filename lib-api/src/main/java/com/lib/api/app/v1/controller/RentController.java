@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RentController {
 
-    private final RentService rentService;
+   /* private final RentService rentService;
 
     @ApiOperation(value = "Book rent.")
     @PostMapping("/rent/book")
     public Rent rentBook(@RequestBody CreateRentRequestDTO param) {
         return rentService.setRent(param);
-    }
+    }*/
 }

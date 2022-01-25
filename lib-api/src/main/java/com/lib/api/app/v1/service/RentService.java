@@ -22,7 +22,7 @@ public class RentService {
     private final BookService bookService;
     private final RentRepository rentRepository;
 
-    @Transactional
+    /*@Transactional
     public Rent setRent(CreateRentRequestDTO param) {
 
         //find User entity
@@ -31,11 +31,11 @@ public class RentService {
 
         RentInfo rentInfo = RentInfo.createRentInfo(oneUser, bookOne);
 
-        Rent rent = Rent.createRent(oneUser,rentInfo );
+     //   Rent rent = Rent.createRent(oneUser,rentInfo );
 
         return rentRepository.save(rent);
     }
-
+*/
     private void checkUpAvailableBookRent(Book.BookStatus bookStatus) {
         if (bookStatus == Book.BookStatus.RENT) {
             throw new IllegalStateException("현재 대여중인 책으로 대여할수 없습니다.");

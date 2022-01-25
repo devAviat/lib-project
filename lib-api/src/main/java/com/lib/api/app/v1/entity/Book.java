@@ -23,8 +23,8 @@ public class Book {
 
     @Id
     @GeneratedValue
-    @Column(name = "book_idx")
-    private Long bookIdx;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "book_id", unique = true)
     private String bookId;
@@ -50,11 +50,6 @@ public class Book {
 
     @Column(name = "create_by", updatable = false)
     private String createBy;
-
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "books")
-    private Book book;
-
 
     @Builder
     public Book(CreateBookDTO param) {

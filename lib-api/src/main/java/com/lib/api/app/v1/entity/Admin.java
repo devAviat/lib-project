@@ -18,7 +18,7 @@ public class Admin {
 
     @Id
     @GeneratedValue
-    private Long idx;
+    private Long id;
 
     @Column(name = "admin_id", nullable = false)
     private String adminId;

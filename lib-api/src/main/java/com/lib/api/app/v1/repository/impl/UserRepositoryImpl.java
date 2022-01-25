@@ -26,7 +26,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     public User findByIdx(Long userIdx) {
         return queryFactory
                 .selectFrom(QUser.user)
-                .where(user.userIdx.eq(userIdx))
+                .where(user.id.eq(userIdx))
                 .fetchOne();
 
     }

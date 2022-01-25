@@ -41,16 +41,6 @@ public class UserService {
                 .param(param)
                 .build();
 
-        // USER Entity 삽입.
-        User saveUserEntity = userRepository
-                .save(build);
-
-        String userBarcodeInfo = makeBarcodeText("U", saveUserEntity.getUserUuid(), saveUserEntity.getCreateDate(), saveUserEntity.getUserIdx());
-
-        // USER barcodeText 주입.
-        saveUserEntity.setUserBarcode(userBarcodeInfo);
-        //createBarcodeImage(userBarcodeInfo);
-
         return userRepository
                 .save(build);
     }

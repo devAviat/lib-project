@@ -20,14 +20,8 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_idx")
-    private Long userIdx;
-
-    @OneToMany(mappedBy = "user")
-    private List<Rent> rents = new ArrayList<>();
-
-    @OneToMany(mappedBy = "userRentInfo")
-    private List<RentInfo> rentInfos = new ArrayList<>();
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "user_id", unique = true, nullable = false)
     private String userId;

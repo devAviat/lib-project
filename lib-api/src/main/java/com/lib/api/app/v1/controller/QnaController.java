@@ -19,7 +19,6 @@ import java.util.List;
 public class QnaController {
 
     private final QnaService qnaService;
-    private final QnaRepository qnaRepository;
 
     /**
      * QNA 등록
@@ -35,12 +34,12 @@ public class QnaController {
     /**
      * QNA 조회.
      *
-     * @param qnaIdx
+     * @param id
      * @return
      */
-    @GetMapping(value = "/qna/{qnaIdx}")
-    public Qna read(@PathVariable Long qnaIdx) {
-        return qnaService.getOneQna(qnaIdx);
+    @GetMapping(value = "/qna/{id}")
+    public Qna read(@PathVariable Long id) {
+        return qnaService.getOneQna(id);
     }
 
     /**

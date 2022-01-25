@@ -31,15 +31,13 @@ public class AdminController {
     @ApiOperation(value = "관리자 생성")
     @PostMapping(value = "/admin")
     public Admin create(CreateAdminDTO domain) {
-        log.info("test:{}", domain);
         return adminService.setCreateAdmin(domain);
     }
 
     @ApiOperation(value = "관리자 상세내역")
-    @GetMapping(value = "/admin/{adminIdx}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> detailOne(@PathVariable Long adminIdx) {
-        Admin admin = adminService.getOneAdmin(adminIdx);
-        log.info("test :: {}", admin);
+    @GetMapping(value = "/admin/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> detailOne(@PathVariable Long id) {
+        Admin admin = adminService.getOneAdmin(id);
         return ResponseEntity.ok(admin);
     }
 

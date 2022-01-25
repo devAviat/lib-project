@@ -31,7 +31,7 @@ public class BookController {
     }
 
     @ApiOperation(value = "도서 단건 조회.")
-    @GetMapping(value = "/book/{bookIdx}")
+    @GetMapping(value = "/book/{id}")
     public Book read(@PathVariable Long bookIdx) {
         return bookService.getBookOne(bookIdx);
     }

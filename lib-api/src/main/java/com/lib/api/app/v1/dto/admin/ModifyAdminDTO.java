@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class ModifyAdminDTO {
-    private Long idx;
+
+    private Long id;
 
     private String name;
 

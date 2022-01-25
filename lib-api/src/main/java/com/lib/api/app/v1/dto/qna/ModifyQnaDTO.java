@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ModifyQnaDTO {
-    private Long qnaIdx;
+    private Long id;
     private String qnaTitle;
     private String qnaContent;
 

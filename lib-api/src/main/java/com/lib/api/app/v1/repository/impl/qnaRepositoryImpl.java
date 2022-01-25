@@ -21,11 +21,11 @@ public class qnaRepositoryImpl implements QnaRepositoryCustom {
         this.builder = new BooleanBuilder();
     }
 
-    @Override
-    public Qna findByQnaIdx(Long qnaIdx) {
+ /*   @Override
+    public Qna findByQnaIdx(Long id) {
         return queryFactory
                 .selectFrom(qna)
-                .where(qna.qnaIdx.eq(qnaIdx)).fetchOne();
+                .where(qna.id.eq(id)).fetchOne();
 
-    }
+    }*/
 }

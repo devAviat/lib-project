@@ -19,15 +19,8 @@ public class Rent {
 
     @Id
     @GeneratedValue
-    @Column(name = "rent_idx")
-    private Long rentIdx;
-
-    @OneToMany(mappedBy = "rent", cascade = CascadeType.ALL)
-    private List<RentInfo> rentInfos = new ArrayList<>();
-
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    private List<Book> books = new ArrayList<>();
-
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "rent_title", nullable = true)
     private String rentTitle;
@@ -46,27 +39,6 @@ public class Rent {
 
     @Column(name = "modify_date", nullable = true)
     private LocalDateTime modifyDate;
-
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "user_idx")
-    private User user;
-
-    public void addRentInfo(RentInfo rentInfo) {
-        rentInfos.add(rentInfo);
-        rentInfo.setRent(this);
-    }
-
-    //==생성 매서드 ==//
-    public static Rent createRent(User user, RentInfo... rentInfos) {
-        Rent rent = new Rent();
-        rent.setUser(user);
-        for (RentInfo rents : rentInfos) {
-            rent.addRentInfo(rents);
-        }
-        rent.setRentDate(LocalDateTime.now());
-        rent.setCreateDate(LocalDateTime.now());
-        return rent;
-    }
 
     @Builder
     public Rent(CreateRentDTO param) {

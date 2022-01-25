@@ -18,8 +18,8 @@ public class Qna {
 
     @Id
     @GeneratedValue
-    @Column(name = "qna_idx")
-    private Long qnaIdx;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "qna_title", nullable = false)
     private String qnaTitle;
