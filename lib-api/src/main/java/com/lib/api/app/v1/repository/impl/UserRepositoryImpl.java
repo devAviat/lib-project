@@ -22,19 +22,11 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
         this.builder = new BooleanBuilder();
     }
 
-    /*@Override
-    public User findByUserId(String userId) {
-        return queryFactory
-                .selectFrom(QUser.user)
-                .where(user.user_id.eq(userId).isNotNull())
-                .fetchOne();
-    }*/
-
     @Override
     public User findByIdx(Long userIdx) {
         return queryFactory
                 .selectFrom(QUser.user)
-                .where(user.idx.eq(userIdx).isNotNull())
+                .where(user.userIdx.eq(userIdx))
                 .fetchOne();
 
     }

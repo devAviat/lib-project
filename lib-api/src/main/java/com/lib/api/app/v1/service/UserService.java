@@ -45,7 +45,7 @@ public class UserService {
         User saveUserEntity = userRepository
                 .save(build);
 
-        String userBarcodeInfo = makeBarcodeText("U", saveUserEntity.getUserUuid(), saveUserEntity.getCreateDate(), saveUserEntity.getIdx());
+        String userBarcodeInfo = makeBarcodeText("U", saveUserEntity.getUserUuid(), saveUserEntity.getCreateDate(), saveUserEntity.getUserIdx());
 
         // USER barcodeText 주입.
         saveUserEntity.setUserBarcode(userBarcodeInfo);

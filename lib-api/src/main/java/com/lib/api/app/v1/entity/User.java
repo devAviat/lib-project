@@ -1,6 +1,5 @@
 package com.lib.api.app.v1.entity;
 
-import com.lib.api.app.config.JPAConfig;
 import com.lib.api.app.v1.dto.user.CreateUserDTO;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.lib.api.app.config.JPAConfig.createId;
 
@@ -19,7 +20,14 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idx;
+    @Column(name = "user_idx")
+    private Long userIdx;
+
+    @OneToMany(mappedBy = "user")
+    private List<Rent> rents = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userRentInfo")
+    private List<RentInfo> rentInfos = new ArrayList<>();
 
     @Column(name = "user_id", unique = true, nullable = false)
     private String userId;
@@ -29,6 +37,9 @@ public class User {
 
     @Column(name = "user_name", nullable = false)
     private String userName;
+
+    @Column(name = "user_rent_cnt", nullable = false)
+    private int userRentCnt;
 
     @Column(name = "user_barcode", nullable = true)
     private String userBarcode;
@@ -45,9 +56,6 @@ public class User {
     @Column(name = "modify_date", nullable = true)
     private LocalDateTime modifyDate;
 
-    @ManyToOne
-    @JoinColumn(name = "rend_id")
-    private Rent rent;
 
     @Builder
     public User(CreateUserDTO param) {
@@ -57,7 +65,15 @@ public class User {
         this.userPhoneNumber = param.getNumber();
         this.userState = param.getState();
         this.createDate = LocalDateTime.now();
+        this.userRentCnt = 5;
     }
 
+    public void createRentInfo(int rentCnt) {
+        int restUserRentCnt = this.userRentCnt - rentCnt;
+        if (restUserRentCnt < 0) {
+            throw new IllegalStateException("현재 사용자는 도서를 대여할수 없습니다.");
+        }
+        this.userRentCnt = restUserRentCnt;
+    }
 
 }

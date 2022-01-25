@@ -1,5 +1,6 @@
 package com.lib.api.app;
 
+import com.lib.api.app.v1.dto.admin.CreateAdminDTO;
 import com.lib.api.app.v1.dto.book.CreateBookDTO;
 import com.lib.api.app.v1.dto.user.CreateUserDTO;
 import com.lib.api.app.v1.service.*;
@@ -21,11 +22,44 @@ public class Dummy {
 
     private final CreateUser createUser;
     private final CreateBook createBook;
+    private final CreateAdmin createAdmin;
 
     @PostConstruct
     public void init() throws Exception {
         createUser.createDummyUser();
         createBook.createDummyBook();
+        createAdmin.createDummyAdmin();
+    }
+
+    @Component
+    @RequiredArgsConstructor
+    static class CreateAdmin {
+
+        @PersistenceContext
+        private EntityManager em;
+        private final AdminService adminService;
+
+
+        @Transactional
+        public void createDummyAdmin() throws Exception {
+
+            CreateAdminDTO createAdminDTO = new CreateAdminDTO();
+            createAdminDTO.setAdmin_id("master_1");
+            createAdminDTO.setAuthority("master");
+            createAdminDTO.setGrade("3");
+            createAdminDTO.setName("관리자");
+
+            CreateAdminDTO createAdminDTO2 = new CreateAdminDTO();
+            createAdminDTO2.setAdmin_id("master_2");
+            createAdminDTO2.setAuthority("master");
+            createAdminDTO2.setGrade("2");
+            createAdminDTO2.setName("부관리자");
+
+            adminService.setCreateAdmin(createAdminDTO);
+            adminService.setCreateAdmin(createAdminDTO2);
+
+        }
+
     }
 
 

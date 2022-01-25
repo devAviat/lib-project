@@ -5,15 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.lib.api.app.config.JPAConfig.createId;
 import static com.lib.api.app.v1.entity.Book.BookStatus.*;
+import static javax.persistence.EnumType.*;
+import static javax.persistence.FetchType.LAZY;
 
 @Entity(name = "BOOK")
 @Data
@@ -37,6 +38,7 @@ public class Book {
     @Column(name = "book_price", nullable = false)
     private Long bookPrice;
 
+    @Enumerated(STRING)
     @Column(name = "book_status", nullable = false)
     private BookStatus bookStatus;
 
@@ -48,6 +50,11 @@ public class Book {
 
     @Column(name = "create_by", updatable = false)
     private String createBy;
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "books")
+    private Book book;
+
 
     @Builder
     public Book(CreateBookDTO param) {
@@ -62,5 +69,7 @@ public class Book {
 
     public enum BookStatus {
         READY, RENT,
+        ;
+
     }
 }

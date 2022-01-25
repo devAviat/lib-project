@@ -31,7 +31,7 @@ public class UserController {
     @PostMapping(value = "/user")
     public Long create(CreateUserDTO param) throws Exception{
         User user = userService.setCreateUser(param);
-        return user.getIdx();
+        return user.getUserIdx();
     }
 
     @ApiOperation(value = "사용자 수정")
