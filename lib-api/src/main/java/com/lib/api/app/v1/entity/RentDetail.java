@@ -20,7 +20,13 @@ public class RentDetail {
     @JoinColumn(name = "rent_id")
     private Rent rentDetail;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "book_id")
     private Book rentBook;
+
+    public static RentDetail createRentDetail(Book bookOne) {
+        RentDetail rentDetail = new RentDetail();
+        rentDetail.setRentBook(bookOne);
+        return rentDetail;
+    }
 }

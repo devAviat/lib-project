@@ -44,8 +44,8 @@ public class User {
     @Column(name = "modify_date")
     private LocalDateTime modifyDate;
 
-    @OneToMany(mappedBy = "user")
-    List<RentUser> rentUsers = new ArrayList<>();
+    @OneToMany(mappedBy = "rent_id")
+    private List<Rent> rentList = new ArrayList<>();
 
     @Builder
     public User(CreateUserDTO param) {

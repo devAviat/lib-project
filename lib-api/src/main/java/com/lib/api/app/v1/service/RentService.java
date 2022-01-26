@@ -19,21 +19,13 @@ public class RentService {
 
     @Transactional
     public Rent setRent(CreateRentRequestDTO param) {
-        param.setUser_idx(2L);
-        param.setBookIdx(3L);
 
-        User oneUser = userService.getOneUser(param.getUser_idx());
-        Book bookOne = bookService.getBookOne(param.getBookIdx());
+        User oneUser = userService.getOneUser(2L);
+        Book bookOne = bookService.getBookOne(3L);
 
-        RentUser rentUser = new RentUser();
-        rentUser.setUser(oneUser);
+        RentDetail rentDetail = RentDetail.createRentDetail(bookOne);
 
-        RentDetail rentDetail = new RentDetail();
-        rentDetail.setRentBook(bookOne);
-
-        Rent rent = new Rent();
-        rent.getRentUserList().add(rentUser);
-        rent.getRentDetailList().add(rentDetail);
+        Rent rent = Rent.createRent(rentDetail);
 
         return rentRepository.save(rent);
     }

@@ -3,6 +3,7 @@ package com.lib.api.app.v1.entity;
 import com.querydsl.core.types.FactoryExpression;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity(name = "RENT")
 @Data
 @NoArgsConstructor
+@Slf4j
 public class Rent {
 
     @Id
@@ -28,10 +30,20 @@ public class Rent {
     @Column(name = "total_rent_cnt")
     private int totalRentCnt;
 
-    @OneToMany(mappedBy = "rentUser", cascade = CascadeType.PERSIST)
-    private List<RentUser> rentUserList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private User user;
 
-    @OneToMany(mappedBy = "rentDetail", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "rentDetail")
     private List<RentDetail> rentDetailList = new ArrayList<>();
+
+    public static Rent createRent(RentDetail rentDetail) {
+        Rent rent = new Rent();
+        rent.setCreateDate(LocalDateTime.now());
+        log.info("rentDetail :: {}", rentDetail);
+
+        return rent;
+    }
+
 
 }
